@@ -1,0 +1,72 @@
+services:
+  php:
+    build:
+      args:
+        UID: ${UID:?}
+        GID: ${GID:?}
+        USERNAME: ${USERNAME:?}
+        HTTP_PROXY: ${HTTP_PROXY:-''}
+        HTTPS_PROXY: ${HTTPS_PROXY:-''}
+        NO_PROXY: ${NO_PROXY:-''}
+    restart: unless-stopped
+    volumes:
+      - ./:/app:rw
+    extra_hosts:
+      - host.docker.internal:host-gateway
+  php-cli:
+    build:
+      context: ./docker/php-cli
+      args:
+        UID: ${UID:?}
+        GID: ${GID:?}
+        USERNAME: ${USERNAME:?}
+    restart: unless-stopped
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    volumes:
+      - ./:/app:rw
+      - ./docker/php-cli/supervisord.d:/etc/supervisord.d:r
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    healthcheck:
+      test: ["CMD", "supervisorctl", "--configuration", "/etc/supervisord.conf", "status" , "wiam-test-queue:"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+  nginx:
+    image: nginx:1.27.5-alpine
+    restart: unless-stopped
+    depends_on:
+      php:
+        condition: service_started
+    volumes:
+      - ./:/app:ro
+      - ./var/log/nginx:/var/log/nginx
+      - ./var/run/nginx:/var/run
+    user: ${UID:?}:${GID:?}
+    environment:
+      PHP_FPM_SERVER: ${PHP_FPM_SERVER:?}
+      PHP_FPM_PORT: ${PHP_FPM_PORT:?}
+      NGINX_SERVER_NAME: ${NGINX_SERVER_NAME:?}
+      TZ: Europe/Moscow
+  rabbitmq:
+    image: rabbitmq:4.1.1-management-alpine
+    restart: unless-stopped
+    ports:
+      - "${RABBITMQ_PORT:?}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:?}:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:?}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?}
+      TZ: Europe/Moscow
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 2s
+      retries: 3
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${DOCKER_SUBNET:?}

@@ -1,0 +1,10 @@
+services:
+  php:
+    build:
+      context: ./docker/php-prod
+  nginx:
+    volumes:
+      - ./docker/nginx-prod/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx-prod/templates:/etc/nginx/templates
+    ports:
+      - '127.0.0.1:${NGINX_EXPOSE_PORT:?}:80'

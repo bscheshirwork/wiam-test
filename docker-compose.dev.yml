@@ -1,0 +1,45 @@
+services:
+  php:
+    build:
+      context: ./docker/php
+    environment:
+      PHP_IDE_CONFIG: ${PHP_IDE_CONFIG:?}
+  nginx:
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/templates:/etc/nginx/templates
+    ports:
+      - '${NGINX_EXPOSE_PORT:?}:80'
+  postgres:
+    image: postgres:17.5-alpine3.22
+    restart: unless-stopped
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./docker/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "${DB_PORT:?}:5432"
+    environment:
+      POSTGRES_DB: "${DB_NAME:?}"
+      POSTGRES_USER: "${DB_USER:?}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD:?}"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER:?} -d ${DB_NAME:?}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+  swagger-ui:
+    image: swaggerapi/swagger-ui:v5.24.0
+    restart: unless-stopped
+    ports:
+      - '8001:8080'
+    volumes:
+      - ./doc/api:/doc
+    environment:
+      SWAGGER_JSON: '/doc/openapi.yaml'

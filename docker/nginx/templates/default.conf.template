@@ -1,0 +1,46 @@
+server {
+        listen 80;
+
+        server_name ${NGINX_SERVER_NAME};
+
+        root /app/web;
+        set $yii2_index "index.php";
+
+        location ~ \.php {
+                fastcgi_split_path_info  ^(.+\.php)(.*)$;
+
+                set $fsn /$yii2_index;
+                if (-f $document_root$fastcgi_script_name){
+                        set $fsn $fastcgi_script_name;
+                }
+
+                include fastcgi_params;
+                fastcgi_pass   ${PHP_FPM_SERVER}:${PHP_FPM_PORT};
+                fastcgi_index  index.php;
+                fastcgi_param  DOCUMENT_ROOT    /app/web;
+                fastcgi_param  SCRIPT_FILENAME  /app/web/$fsn;
+                fastcgi_param  PATH_INFO        $fastcgi_path_info;
+                fastcgi_param  PATH_TRANSLATED  $document_root$fsn;
+
+                set $delimeter "";
+                if ($is_args) {
+                    set $delimeter "&";
+                }
+                set $args "$args${delimeter}XDEBUG_SESSION=nginx";
+        }
+
+        location / {
+                index  index.html $yii2_index;
+                try_files $uri $uri/ /$yii2_index?$args;
+        }
+
+        location ~ /\. {
+                deny all;
+                access_log off;
+                log_not_found off;
+        }
+
+        error_log /var/log/nginx/error.log crit;
+        access_log /var/log/nginx/access.log;
+        client_max_body_size 256m;
+}

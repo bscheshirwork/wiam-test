@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: 'API for wiam-test'
+  version: '0.1'
+servers:
+  - url: 'http://0.0.0.0:8000/api/v1'
+paths:
+  /requests:
+    post:
+      tags:
+        - Loan
+      summary: 'Подача заявки на займ'
+      operationId: 'createLoan'
+      requestBody:
+        description: 'Подача заявки на займ'
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                user_id:
+                  type: integer
+                amount:
+                  type: integer
+                term:
+                  type: integer
+              type: object
+      responses:
+        '201':
+          description: 'OK'
+        '400':
+          description: 'Validation Error'
+        '500':
+          description: 'Server Error'
+      security:
+        - ApiKeyAuth: []
+  /processor:
+    get:
+      tags:
+        - Loan
+      summary: 'Обработка заявок'
+      operationId: 'processLoans'
+      requestBody:
+        description: 'Обработка заявок'
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                delay:
+                  type: integer
+              type: object
+      responses:
+        '200':
+          description: 'OK'
+        '500':
+          description: 'Server Error'
+      security:
+        - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-KEY
+      in: header
