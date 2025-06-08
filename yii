@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+define('YII_DEBUG', filter_var(env('YII_DEBUG', true), FILTER_VALIDATE_BOOLEAN));
+define('YII_ENV', env('YII_ENV', 'dev'));
+
+require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
+Yii::setAlias('@app', __DIR__);
+
+$config = require __DIR__ . '/config/console.php';
+
+$application = new yii\console\Application($config);
+$exitCode = $application->run();
+exit($exitCode);
