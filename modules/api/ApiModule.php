@@ -11,7 +11,7 @@ final class ApiModule extends Module implements BootstrapInterface
 {
     public $controllerNamespace = 'app\modules\api\controllers';
 
-    public function bootstrap($app)
+    public function bootstrap($app): void
     {
         $app->getUrlManager()->addRules([
             [
@@ -27,10 +27,12 @@ final class ApiModule extends Module implements BootstrapInterface
         ]);
     }
 
-    public function init()
+    public function init(): void
     {
         parent::init();
 
-        $this->setModule('v1', ApiV1Module::class);
+        $this->setModules([
+            'v1' => ApiV1Module::class,
+        ]);
     }
 }
