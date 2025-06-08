@@ -2,10 +2,10 @@
 
 namespace app\modules\api\modules\v1;
 
-use yii\base\Module as BaseModule;
+use yii\base\Module;
 
 
-final class Module extends BaseModule
+final class ApiV1Module extends Module
 {
     public $controllerNamespace = 'app\modules\api\modules\v1\controllers';
 }

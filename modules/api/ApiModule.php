@@ -2,12 +2,12 @@
 
 namespace app\modules\api;
 
-use app\modules\api\modules\v1\Module;
+use app\modules\api\modules\v1\ApiV1Module;
 use yii\base\BootstrapInterface;
-use yii\base\Module as BaseModule;
+use yii\base\Module;
 use yii\rest\UrlRule;
 
-final class Module extends BaseModule implements BootstrapInterface
+final class ApiModule extends Module implements BootstrapInterface
 {
     public $controllerNamespace = 'app\modules\api\controllers';
 
@@ -16,12 +16,12 @@ final class Module extends BaseModule implements BootstrapInterface
         $app->getUrlManager()->addRules([
             [
                 'class' => UrlRule::class,
-                'controller' => $this->getId() . '/v1/requests',
+                'controller' => $this->id . '/v1/requests',
                 'pluralize' => false,
             ],
             [
                 'class' => UrlRule::class,
-                'controller' => $this->getId() . '/v1/processor',
+                'controller' => $this->id . '/v1/processor',
                 'pluralize' => false,
             ],
         ]);
@@ -31,6 +31,6 @@ final class Module extends BaseModule implements BootstrapInterface
     {
         parent::init();
 
-        $this->setModule('v1', Module::class);
+        $this->setModule('v1', ApiV1Module::class);
     }
 }

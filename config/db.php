@@ -1,7 +1,9 @@
 <?php
 
+use yii\db\Connection;
+
 return [
-    'class' => 'yii\db\Connection',
+    'class' => Connection::class,
     'dsn' => sprintf(
         '%s:host=%s;port=%s;dbname=%s',
         env('DB_DRIVER', 'pgsql'),

@@ -1,6 +1,9 @@
 <?php
 
-use app\modules\api\Module as ApiModule;
+use app\modules\api\ApiModule as ApiModule;
+use yii\caching\FileCache;
+use yii\log\FileTarget;
+use yii\web\JsonParser;
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
@@ -24,7 +27,7 @@ return [
             'cookieValidationKey' => '',
             'enableCsrfValidation' => false,
             'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
+                'application/json' => JsonParser::class,
             ]
         ],
         'urlManager' => [
@@ -39,14 +42,14 @@ return [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => FileTarget::class,
                     'levels' => ['error'],
                     'logFile' => '@runtime/log/error.log',
                 ],
             ],
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => FileCache::class,
             'cachePath' => '@runtime/cache',
         ],
     ],
