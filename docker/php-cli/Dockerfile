@@ -17,16 +17,16 @@ RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     intl \
     zip  \
     gd \
-    pdo_mysql \
+    pdo_pgsql \
     memcache \
-    redis\
+    sockets\
     exif\
     pcntl
 
 COPY conf.d/* /usr/local/etc/php/conf.d/
 
 WORKDIR /app
-ENV PATH "$PATH:/app"
+ENV PATH "$PATH:/app:/app/bin"
 
 ARG USERNAME=www
 ARG GROUPNAME=www

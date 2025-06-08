@@ -18,6 +18,7 @@ return [
     ],
     'components' => [
         'db' => $db,
+        'queue' => $queue,
     ],
     'params' => $params,
 ];

@@ -1,0 +1,27 @@
+{
+  "name": "bscheshirwork/wiam-test",
+  "description": "wiam test",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "type": "project",
+  "authors": [
+    {
+      "name": "dev",
+      "email": "bscheshir.work@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "~8.4",
+    "yidas/yii2-composer-bower-skip": "~2.0.13",
+    "yiisoft/yii2": "~2.0.52",
+    "yiisoft/yii2-queue": "~2.3.7",
+    "yiithings/yii2-dotenv": "~1.1",
+    "enqueue/amqp-lib": "^0.10.26",
+    "php-amqplib/php-amqplib": "^3.7.3"
+  },
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
+  }
+}

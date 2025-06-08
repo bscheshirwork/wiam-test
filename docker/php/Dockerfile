@@ -17,9 +17,9 @@ RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     intl \
     zip  \
     gd \
-    pdo_mysql \
+    pdo_pgsql \
     memcache \
-    redis\
+    sockets\
     exif\
     xdebug\
     pcntl
@@ -31,10 +31,11 @@ RUN chmod +x /usr/local/bin/dphp
 # Install composer
 #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 COPY composer.phar /usr/local/bin/composer
+RUN chmod ug+x /usr/local/bin/composer
 RUN php -- composer config -g repos.packagist composer https://packagist.org.ru
 
 WORKDIR /app
-ENV PATH "$PATH:/app"
+ENV PATH "$PATH:/app:/app/bin"
 
 ARG USERNAME=www
 ARG GROUPNAME=www
