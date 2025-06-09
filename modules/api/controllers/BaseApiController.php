@@ -5,6 +5,7 @@ namespace app\modules\api\controllers;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
+use yii\rest\OptionsAction;
 use yii\web\Response;
 
 class BaseApiController extends Controller
@@ -32,5 +33,14 @@ class BaseApiController extends Controller
         }
 
         return $this->request->get();
+    }
+
+    public function actions(): array
+    {
+        return [
+            'options' => [
+                'class' => OptionsAction::class,
+            ],
+        ];
     }
 }
