@@ -16,8 +16,8 @@ final class ApiModule extends Module implements BootstrapInterface
         $app->getUrlManager()->addRules([
             [
                 'class' => UrlRule::class,
-                'controller' => $this->id . '/v1/requests',
-                'pluralize' => false,
+                'controller' => $this->id . '/v1/request',
+                'pluralize' => true,
             ],
             [
                 'class' => UrlRule::class,
