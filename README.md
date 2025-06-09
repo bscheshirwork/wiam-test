@@ -129,6 +129,19 @@ HTTP Code 200
 
 4. Выполнить миграции `wiam-test$ docker compose exec php yii migrate/up`.
 
+Проверка
+```
+wiam-test$ curl -X 'POST'   'http://0.0.0.0/requests'   -H 'accept: */*'   -H 'Content-Type: application/json'   -d '{
+  "user_id": 2,
+  "amount": 2,
+  "term": 2
+}'
+{"result":true,"id":4}
+```
+```
+wiam-test$ curl -X 'GET'   'http://0.0.0.0/processor?delay=1'   -H 'accept: */*'
+{"result":true}
+```
 
 Информация о трудозатратах, треки
 - 
