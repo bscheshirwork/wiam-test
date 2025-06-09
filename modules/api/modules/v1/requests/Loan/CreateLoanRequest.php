@@ -3,7 +3,11 @@
 
 namespace app\modules\api\modules\v1\requests\Loan;
 
+use app\contracts\Client\ClientServiceInterface;
+use app\contracts\Client\LoanFilter;
+use app\contracts\Loan\CreateLoanDto;
 use app\modules\api\modules\v1\requests\BaseApiV1Request;
+use Yii;
 
 final class CreateLoanRequest extends BaseApiV1Request
 {
@@ -17,6 +21,18 @@ final class CreateLoanRequest extends BaseApiV1Request
     {
         return [
             [['user_id', 'amount', 'term'], 'required'],
+            [['user_id', 'amount', 'term'], 'integer'],
+            ['user_id', function ($attribute, $params) {
+                $clientService = Yii::$container->get(ClientServiceInterface::class);
+                if ($clientService->hasLoansFilter(new LoanFilter((int)$this->$attribute))) {
+                    $this->addError($attribute, 'Already concluded');
+                }
+            }],
         ];
+    }
+
+    public function getCreatedLoanDto(): CreateLoanDto
+    {
+        return new CreateLoanDto($this->user_id, $this->amount, $this->term);
     }
 }

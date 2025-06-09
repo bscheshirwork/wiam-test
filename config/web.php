@@ -8,6 +8,7 @@ use yii\web\JsonParser;
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $queue = require __DIR__ . '/queueComponent.php';
+$commonParts = require __DIR__ . '/common.php';
 
 return [
     'id' => 'wiam-test',
@@ -17,6 +18,7 @@ return [
     'bootstrap' => [
         'log',
         'api',
+        ...$commonParts['bootstrap'],
     ],
     'params' => $params,
     'modules' => [
@@ -34,6 +36,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'requests' => 'api/v1/request',
+                'processor' => 'api/v1/processor',
             ],
         ],
         'db' => $db,
