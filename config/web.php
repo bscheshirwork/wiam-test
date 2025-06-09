@@ -36,8 +36,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'requests' => 'api/v1/request',
-                'processor' => 'api/v1/processor',
+                'requests' => 'api/v1/request/create',
+                'processor' => 'api/v1/processor/index',
             ],
         ],
         'db' => $db,

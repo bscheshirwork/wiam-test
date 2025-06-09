@@ -40,16 +40,13 @@ paths:
         - Loan
       summary: 'Обработка заявок'
       operationId: 'processLoans'
-      requestBody:
-        description: 'Обработка заявок'
-        required: true
-        content:
-          application/json:
-            schema:
-              properties:
-                delay:
-                  type: integer
-              type: object
+      parameters:
+        -
+          name: delay
+          in: query
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: 'OK'

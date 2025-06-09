@@ -11,7 +11,7 @@ use Yii;
 
 final class RequestController extends BaseApiController
 {
-    public function actionIndex(): ResponseSuccess|ResponseValidationError
+    public function actionCreate(): ResponseSuccess|ResponseValidationError
     {
         $request = new CreateLoanRequest();
         $request->load($this->getRequestData());
