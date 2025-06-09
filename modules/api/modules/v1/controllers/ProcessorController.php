@@ -9,7 +9,7 @@ use app\modules\api\modules\v1\responses\ResponseValidationError;
 
 final class ProcessorController extends BaseApiController
 {
-    public function indexAction(): ResponseSuccess|ResponseValidationError
+    public function actionIndex(): ResponseSuccess|ResponseValidationError
     {
         $request = new CreateLoanRequest();
         $request->load($this->getRequestData());

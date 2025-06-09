@@ -8,7 +8,7 @@ use app\modules\api\modules\v1\responses\ResponseSuccess;
 
 final class RequestsController extends BaseApiController
 {
-    public function indexAction(int $delay): ResponseSuccess
+    public function actionIndex(int $delay): ResponseSuccess
     {
         $request = new ProcessLoansRequest();
         $request->load($this->getRequestData());
