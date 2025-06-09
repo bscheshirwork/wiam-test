@@ -13,7 +13,7 @@ return [
     ),
     'username' => env('DB_USER', 'user'),
     'password' => env('DB_PASSWORD', 'password'),
-    'charset' => 'utf8mb4',
+    'charset' => 'utf8',
     'enableSchemaCache' => true,
     'schemaCacheDuration' => 3600,
     'schemaCache' => 'cache',
