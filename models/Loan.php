@@ -4,7 +4,6 @@ namespace app\models;
 
 use app\contracts\Loan\CreateLoanDto;
 use app\contracts\Loan\LoanStatusEnum;
-use yii\db\ActiveRecord;
 use yii\web\ServerErrorHttpException;
 
 
@@ -13,31 +12,18 @@ use yii\web\ServerErrorHttpException;
  * @property int $user_id
  * @property int $amount
  * @property int $term
- * @property int $status
+ * @property LoanStatusEnum $status
  */
-final class Loan extends ActiveRecord
+#[ModelAttribute(name: 'id', type: 'integer', label: 'ID', rules: [['required']])]
+#[ModelAttribute(name: 'user_id', type: 'integer', label: 'User ID', rules: [['required']])]
+#[ModelAttribute(name: 'amount', type: 'integer', label: 'Amount', rules: [['required']])]
+#[ModelAttribute(name: 'term', type: 'integer', label: 'Term', rules: [['required']])]
+#[ModelAttribute(name: 'status', type: LoanStatusEnum::class, label: 'Status', rules: [['required']])]
+final class Loan extends BaseActiveRecord
 {
     public static function tableName(): string
     {
         return '{{%loan}}';
-    }
-
-    public function rules(): array
-    {
-        return [
-            [['user_id', 'amount', 'term', 'status'], 'required'],
-        ];
-    }
-
-    public function attributeLabels(): array
-    {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'amount' => 'Amount',
-            'term' => 'Term',
-            'status' => 'Status',
-        ];
     }
 
     public static function hasUser(int $userId): bool
@@ -54,7 +40,7 @@ final class Loan extends ActiveRecord
         $loan->user_id = $createLoanDto->userId;
         $loan->amount = $createLoanDto->amount;
         $loan->term = $createLoanDto->term;
-        $loan->status = LoanStatusEnum::NEW->value;
+        $loan->status = LoanStatusEnum::NEW;
 
         if ($loan->save()) {
             return $loan->id;

@@ -28,10 +28,10 @@ final class LoanService implements LoanServiceInterface
             if ($status === LoanStatusEnum::APPROVED) {
                 //проверка на то, что не сохранили в другом потоке.
                 $loan->status = Loan::hasUser($loan->user_id) ?
-                    LoanStatusEnum::DECLINED->value :
-                    LoanStatusEnum::APPROVED->value;
+                    LoanStatusEnum::DECLINED :
+                    LoanStatusEnum::APPROVED;
             } else {
-                $loan->status = LoanStatusEnum::DECLINED->value;
+                $loan->status = LoanStatusEnum::DECLINED;
             }
             if (!$loan->save()) {
                 throw new ServerErrorHttpException('Failed to update loan');
