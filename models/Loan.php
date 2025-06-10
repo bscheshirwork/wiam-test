@@ -63,22 +63,14 @@ final class Loan extends ActiveRecord
         throw new ServerErrorHttpException('Failed to create loan');
     }
 
-    //todo должно работать. Нет времени тестить, пока onePiece
-//    public static function getNewLoans(): iterable
-//    {
-//        yield Loan::find()
-//            ->where([
-//                'status' => LoanStatusEnum::NEW->value,
-//            ])
-//            ->each();
-//    }
-
-    public static function getNewLoans(): array
+    public static function getNewLoans(): iterable
     {
-        return Loan::find()
-            ->where([
-                'status' => LoanStatusEnum::NEW->value,
-            ])
-            ->all();
+        foreach (Loan::find()
+                     ->where([
+                         'status' => LoanStatusEnum::NEW->value,
+                     ])
+                     ->each() as $loan) {
+            yield $loan;
+        }
     }
 }
