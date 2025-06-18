@@ -25,6 +25,7 @@ parameters:
     excludePaths:
         analyse:
             - ../../vendor
+            - ./ecs.php
     scanFiles:
         - ../../vendor/yiisoft/yii2/Yii.php
     dynamicConstantNames:
