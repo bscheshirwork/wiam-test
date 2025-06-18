@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<psalm
+        errorLevel="5"
+        resolveFromConfigFile="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config ../../vendor/vimeo/psalm/config.xsd"
+        autoloader="../../vendor/yiisoft/yii2/Yii.php"
+        phpVersion="8.4"
+        cacheDirectory="../../var/cache/.psalm_cache"
+        findUnusedBaselineEntry="true"
+        findUnusedCode="false"
+>
+    <projectFiles>
+        <directory name="../../bin"/>
+        <directory name="../../bootstraps"/>
+        <directory name="../../config"/>
+        <directory name="../../contracts"/>
+        <directory name="../../models"/>
+        <directory name="../../modules"/>
+        <directory name="../../services"/>
+        <ignoreFiles>
+            <directory name="../../vendor"/>
+        </ignoreFiles>
+    </projectFiles>
+    <issueHandlers>
+        <UndefinedInterfaceMethod errorLevel="error"/>
+        <InvalidClass errorLevel="error"/>
+        <AssignmentToVoid errorLevel="error"/>
+        <InvalidArrayAccess errorLevel="error"/>
+        <UndefinedClass errorLevel="error"/>
+        <MethodSignatureMismatch errorLevel="error"/>
+        <UndefinedDocblockClass errorLevel="error"/>
+        <MissingDependency errorLevel="error"/>
+        <InvalidNullableReturnType errorLevel="error"/>
+        <FalsableReturnStatement errorLevel="error"/>
+
+        <LessSpecificImplementedReturnType errorLevel="suppress"/>
+    </issueHandlers>
+</psalm>

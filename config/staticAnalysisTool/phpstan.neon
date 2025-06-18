@@ -1,0 +1,34 @@
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+parameters:
+    level: 0
+    strictRules:
+        disallowedLooseComparison: true
+        booleansInConditions: false
+        uselessCast: true
+        requireParentConstructorCall: true
+        disallowedConstructs: false
+        overwriteVariablesWithLoop: true
+        closureUsesThis: true
+        matchingInheritedMethodNames: true
+        numericOperandsInArithmeticOperators: true
+        strictCalls: true
+        switchConditionsMatchingType: true
+        noVariableVariables: true
+    tmpDir: ../../var/cache/.phpstain_cache
+    paths:
+        - ../../bin
+        - ../../bootstraps
+        - ../../config
+        - ../../contracts
+        - ../../models
+        - ../../modules
+        - ../../services
+    excludePaths:
+        analyse:
+            - ../../vendor
+    scanFiles:
+        - ../../vendor/yiisoft/yii2/Yii.php
+    dynamicConstantNames:
+        - YII_DEBUG
+        - YII_ENV

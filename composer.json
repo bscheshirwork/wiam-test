@@ -19,9 +19,25 @@
     "enqueue/amqp-lib": "^0.10.26",
     "php-amqplib/php-amqplib": "^3.7.3"
   },
+  "require-dev": {
+    "symplify/easy-coding-standard": "^12.5.20",
+    "phpstan/phpstan": "^2.1.17",
+    "phpstan/phpstan-strict-rules": "^2.0.4",
+    "vimeo/psalm": "^6.12.0",
+    "rector/rector": "^2.0.18"
+  },
   "config": {
     "allow-plugins": {
       "yiisoft/yii2-composer": true
     }
+  },
+  "scripts": {
+    "ecs": "vendor/bin/ecs check --config config/staticAnalysisTool/ecs.php",
+    "ecs-fix": "vendor/bin/ecs check --fix --config config/staticAnalysisTool/ecs.php",
+    "phpstan": "php -d memory_limit=4G vendor/bin/phpstan analyse -c config/staticAnalysisTool/phpstan.neon",
+    "psalm": "vendor/bin/psalm --config=config/staticAnalysisTool/psalm.xml",
+    "psalm-info": "vendor/bin/psalm --show-info=true --config=config/staticAnalysisTool/psalm.xml",
+    "rector": "vendor/bin/rector process --dry-run --config config/staticAnalysisTool/rector.php",
+    "rector-fix": "vendor/bin/rector process --config config/staticAnalysisTool/rector.php"
   }
 }
