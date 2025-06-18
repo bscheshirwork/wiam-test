@@ -3,18 +3,8 @@
 declare(strict_types=1);
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
-use Rector\CodeQuality\Rector\Empty_\SimplifyEmptyCheckOnEmptyArrayRector;
-use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
-use Rector\CodeQuality\Rector\If_\CombineIfRector;
-use Rector\CodeQuality\Rector\If_\SimplifyIfReturnBoolRector;
-use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;
-use Rector\Strict\Rector\BooleanNot\BooleanInBooleanNotRuleFixerRector;
-use Rector\Strict\Rector\If_\BooleanInIfConditionRuleFixerRector;
-use Rector\Strict\Rector\Ternary\BooleanInTernaryOperatorRuleFixerRector;
-use Rector\TypeDeclaration\Rector\BooleanAnd\BinaryOpNullableToInstanceofRector;
-use Rector\TypeDeclaration\Rector\While_\WhileNullableToInstanceofRector;
 
 defined('BASE_DIR') || define('BASE_DIR', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
 
@@ -48,19 +38,5 @@ return static function (RectorConfig $rectorConfig): void {
         SetList::DEAD_CODE,
         SetList::PRIVATIZATION,
         SetList::TYPE_DECLARATION,
-    ]);
-
-
-    $rectorConfig->skip([
-        BinaryOpNullableToInstanceofRector::class, //SetList::INSTANCEOF - усложнение
-        FlipTypeControlToUseExclusiveTypeRector::class, //SetList::INSTANCEOF - усложнение
-        WhileNullableToInstanceofRector::class, //SetList::INSTANCEOF - усложнение
-        BooleanInBooleanNotRuleFixerRector::class, //SetList::STRICT_BOOLEANS - усложнения
-        BooleanInIfConditionRuleFixerRector::class, //SetList::STRICT_BOOLEANS - усложнения
-        BooleanInTernaryOperatorRuleFixerRector::class, //SetList::STRICT_BOOLEANS - усложнения
-        EncapsedStringsToSprintfRector::class, // SetList::CODING_STYLE - менее очевидные шаблоны, просто шум
-        SimplifyEmptyCheckOnEmptyArrayRector::class, //SetList::CODE_QUALITY - одновременно с null и empty
-        SimplifyIfReturnBoolRector::class, //SetList::CODE_QUALITY - визуальное усложнение
-        CombineIfRector::class, //SetList::CODE_QUALITY - визуальное усложнение
     ]);
 };

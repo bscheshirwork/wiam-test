@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\api\ApiModule as ApiModule;
+use app\modules\api\ApiModule;
 use yii\caching\FileCache;
 use yii\log\FileTarget;
 use yii\web\JsonParser;

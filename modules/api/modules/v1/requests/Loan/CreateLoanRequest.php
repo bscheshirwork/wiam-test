@@ -21,7 +21,7 @@ final class CreateLoanRequest extends BaseApiV1Request
         return [
             [['user_id', 'amount', 'term'], 'required'],
             [['user_id', 'amount', 'term'], 'integer'],
-            ['user_id', function ($attribute, $params) {
+            ['user_id', function ($attribute, $params): void {
                 $clientService = Yii::$container->get(ClientServiceInterface::class);
                 if ($clientService->hasLoansFilter(new LoanFilter((int) $this->{$attribute}))) {
                     $this->addError($attribute, 'Already concluded');

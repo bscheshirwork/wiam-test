@@ -33,6 +33,7 @@ final class LoanService implements LoanServiceInterface
             } else {
                 $loan->status = LoanStatusEnum::DECLINED;
             }
+
             if (!$loan->save()) {
                 throw new ServerErrorHttpException('Failed to update loan');
             }
