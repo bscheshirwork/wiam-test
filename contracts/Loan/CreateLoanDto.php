@@ -8,7 +8,6 @@ final readonly class CreateLoanDto
         public int $userId,
         public int $amount,
         public int $term,
-    )
-    {
+    ) {
     }
 }

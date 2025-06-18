@@ -30,7 +30,7 @@ return [
             'enableCsrfValidation' => false,
             'parsers' => [
                 'application/json' => JsonParser::class,
-            ]
+            ],
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,

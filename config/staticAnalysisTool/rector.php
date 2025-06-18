@@ -59,8 +59,8 @@ return static function (RectorConfig $rectorConfig): void {
         BooleanInIfConditionRuleFixerRector::class, //SetList::STRICT_BOOLEANS - усложнения
         BooleanInTernaryOperatorRuleFixerRector::class, //SetList::STRICT_BOOLEANS - усложнения
         EncapsedStringsToSprintfRector::class, // SetList::CODING_STYLE - менее очевидные шаблоны, просто шум
-        SimplifyEmptyCheckOnEmptyArrayRector::class,//SetList::CODE_QUALITY - одновременно с null и empty
-        SimplifyIfReturnBoolRector::class,//SetList::CODE_QUALITY - визуальное усложнение
+        SimplifyEmptyCheckOnEmptyArrayRector::class, //SetList::CODE_QUALITY - одновременно с null и empty
+        SimplifyIfReturnBoolRector::class, //SetList::CODE_QUALITY - визуальное усложнение
         CombineIfRector::class, //SetList::CODE_QUALITY - визуальное усложнение
     ]);
 };

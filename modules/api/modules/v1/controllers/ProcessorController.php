@@ -18,9 +18,13 @@ final class ProcessorController extends BaseApiController
             $loanService = Yii::$container->get(LoanServiceInterface::class);
             $result = $loanService->processLoans($request->getProcessLoansDto());
 
-            return new ResponseSuccess(['result' => $result]);
+            return new ResponseSuccess([
+                'result' => $result,
+            ]);
         }
 
-        return new ResponseSuccess(['result' => false]);
+        return new ResponseSuccess([
+            'result' => false,
+        ]);
     }
 }

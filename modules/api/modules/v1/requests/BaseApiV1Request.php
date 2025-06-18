@@ -6,5 +6,4 @@ use app\modules\api\requests\BaseApiRequest;
 
 class BaseApiV1Request extends BaseApiRequest
 {
-
 }

@@ -9,9 +9,9 @@ use yii\validators\Validator;
 
 trait ModelAttributeTrait
 {
-    private static array $attributesConfig = [];
-
     protected ?array $attributeLabels = null;
+
+    private static array $attributesConfig = [];
 
     public static function getAttributesConfig(): array
     {
@@ -27,7 +27,7 @@ trait ModelAttributeTrait
         return static::$attributesConfig[static::class];
     }
 
-    public final function rules(): array
+    final public function rules(): array
     {
         throw new InvalidConfigException('The rules cannot be applied.');
     }
@@ -45,7 +45,7 @@ trait ModelAttributeTrait
                 if ($rule instanceof Validator) {
                     $validators->append($rule);
                 } elseif (is_array($rule) && isset($rule[0])) { // validator type
-                    $validator = Validator::createValidator($rule[0], $this, (array)$attribute, array_slice($rule, 1));
+                    $validator = Validator::createValidator($rule[0], $this, (array) $attribute, array_slice($rule, 1));
                     $validators->append($validator);
                 } else {
                     throw new InvalidConfigException('Invalid validation rule: a rule must specify validator type.');

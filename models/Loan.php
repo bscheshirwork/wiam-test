@@ -6,7 +6,6 @@ use app\contracts\Loan\CreateLoanDto;
 use app\contracts\Loan\LoanStatusEnum;
 use yii\web\ServerErrorHttpException;
 
-
 /**
  * @property int $id
  * @property int $user_id
@@ -28,7 +27,7 @@ final class Loan extends BaseActiveRecord
 
     public static function hasUser(int $userId): bool
     {
-        return boolval(Loan::findOne([
+        return boolval(self::findOne([
             'user_id' => $userId,
             'status' => LoanStatusEnum::APPROVED->value,
         ])?->id ?? false);
@@ -51,11 +50,11 @@ final class Loan extends BaseActiveRecord
 
     public static function getNewLoans(): iterable
     {
-        foreach (Loan::find()
-                     ->where([
-                         'status' => LoanStatusEnum::NEW->value,
-                     ])
-                     ->each() as $loan) {
+        foreach (self::find()
+            ->where([
+                'status' => LoanStatusEnum::NEW->value,
+            ])
+            ->each() as $loan) {
             yield $loan;
         }
     }

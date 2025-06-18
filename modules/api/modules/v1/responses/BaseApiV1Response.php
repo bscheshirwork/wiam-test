@@ -6,5 +6,4 @@ use app\modules\api\responses\BaseApiResponse;
 
 class BaseApiV1Response extends BaseApiResponse
 {
-
 }

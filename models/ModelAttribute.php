@@ -4,7 +4,7 @@ namespace app\models;
 
 use Attribute;
 
-#[Attribute(Attribute::TARGET_CLASS|Attribute::IS_REPEATABLE)]
+#[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 final readonly class ModelAttribute
 {
     public bool $isEnum;
@@ -14,8 +14,7 @@ final readonly class ModelAttribute
         public string $type,
         public string $label,
         public array $rules = [],
-    )
-    {
+    ) {
         $this->isEnum = enum_exists($this->type);
     }
 }

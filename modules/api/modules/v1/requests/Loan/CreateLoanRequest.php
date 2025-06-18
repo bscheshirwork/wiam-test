@@ -1,6 +1,5 @@
 <?php
 
-
 namespace app\modules\api\modules\v1\requests\Loan;
 
 use app\contracts\Client\ClientServiceInterface;
@@ -24,7 +23,7 @@ final class CreateLoanRequest extends BaseApiV1Request
             [['user_id', 'amount', 'term'], 'integer'],
             ['user_id', function ($attribute, $params) {
                 $clientService = Yii::$container->get(ClientServiceInterface::class);
-                if ($clientService->hasLoansFilter(new LoanFilter((int)$this->$attribute))) {
+                if ($clientService->hasLoansFilter(new LoanFilter((int) $this->{$attribute}))) {
                     $this->addError($attribute, 'Already concluded');
                 }
             }],

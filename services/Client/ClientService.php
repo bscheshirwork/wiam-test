@@ -8,7 +8,8 @@ use app\models\Loan;
 
 final class ClientService implements ClientServiceInterface
 {
-    public function hasLoansFilter(LoanFilter $filter): bool {
+    public function hasLoansFilter(LoanFilter $filter): bool
+    {
         return Loan::hasUser($filter->userId);
     }
 }

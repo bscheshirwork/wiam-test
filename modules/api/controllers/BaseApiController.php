@@ -12,7 +12,9 @@ use yii\web\Response;
 class BaseApiController extends Controller
 {
     protected const BEHAVIOR_CONTENT_NEGOTIATION = 'contentNegotiation';
+
     protected const BEHAVIOR_VERB_FILTER = 'verbFilter';
+
     protected const BEHAVIOR_CORS_FILTER = 'corsFilter';
 
     public function behaviors(): array

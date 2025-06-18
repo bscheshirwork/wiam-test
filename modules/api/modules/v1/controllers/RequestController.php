@@ -19,7 +19,9 @@ final class RequestController extends BaseApiController
             $loanService = Yii::$container->get(LoanServiceInterface::class);
             $loanId = $loanService->createLoan($request->getCreatedLoanDto());
 
-            return new ResponseSuccess(['id' => $loanId]);
+            return new ResponseSuccess([
+                'id' => $loanId,
+            ]);
         }
 
         //note: было бы удобно для пользователей видить ошибка валидации, но в спецификации такого нет
