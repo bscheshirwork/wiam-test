@@ -2,6 +2,7 @@
 
 namespace app\modules\api\modules\v1\requests\Loan;
 
+use Override;
 use app\contracts\Client\ClientServiceInterface;
 use app\contracts\Client\LoanFilter;
 use app\contracts\Loan\CreateLoanDto;
@@ -16,6 +17,7 @@ final class CreateLoanRequest extends BaseApiV1Request
 
     public ?int $term = null;
 
+    #[Override]
     public function rules(): array
     {
         return [

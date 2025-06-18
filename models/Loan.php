@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Override;
+use Generator;
 use app\contracts\Loan\CreateLoanDto;
 use app\contracts\Loan\LoanStatusEnum;
 use yii\web\ServerErrorHttpException;
@@ -20,6 +22,7 @@ use yii\web\ServerErrorHttpException;
 #[ModelAttribute(name: 'status', type: LoanStatusEnum::class, label: 'Status', rules: [['required']])]
 final class Loan extends BaseActiveRecord
 {
+    #[Override]
     public static function tableName(): string
     {
         return '{{%loan}}';
@@ -48,7 +51,7 @@ final class Loan extends BaseActiveRecord
         throw new ServerErrorHttpException('Failed to create loan');
     }
 
-    public static function getNewLoans(): iterable
+    public static function getNewLoans(): Generator
     {
         foreach (self::find()
             ->where([

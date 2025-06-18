@@ -2,6 +2,7 @@
 
 namespace app\modules\api;
 
+use Override;
 use app\modules\api\modules\v1\ApiV1Module;
 use yii\base\BootstrapInterface;
 use yii\base\Module;
@@ -11,6 +12,7 @@ final class ApiModule extends Module implements BootstrapInterface
 {
     public $controllerNamespace = 'app\modules\api\controllers';
 
+    #[Override]
     public function bootstrap($app): void
     {
         $app->getUrlManager()->addRules([
@@ -27,6 +29,7 @@ final class ApiModule extends Module implements BootstrapInterface
         ]);
     }
 
+    #[Override]
     public function init(): void
     {
         parent::init();

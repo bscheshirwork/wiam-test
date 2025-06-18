@@ -27,7 +27,7 @@ trait ModelAttributeTrait
         return static::$attributesConfig[static::class];
     }
 
-    final public function rules(): array
+    final public function rules(): never
     {
         throw new InvalidConfigException('The rules cannot be applied.');
     }

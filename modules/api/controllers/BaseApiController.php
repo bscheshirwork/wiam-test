@@ -2,6 +2,7 @@
 
 namespace app\modules\api\controllers;
 
+use Override;
 use yii\filters\ContentNegotiator;
 use yii\filters\Cors;
 use yii\filters\VerbFilter;
@@ -17,6 +18,7 @@ class BaseApiController extends Controller
 
     protected const BEHAVIOR_CORS_FILTER = 'corsFilter';
 
+    #[Override]
     public function behaviors(): array
     {
         return [
@@ -45,6 +47,7 @@ class BaseApiController extends Controller
         ];
     }
 
+    #[Override]
     public function actions(): array
     {
         return [
@@ -54,6 +57,7 @@ class BaseApiController extends Controller
         ];
     }
 
+    #[Override]
     public function afterAction($action, $result): Response
     {
         /** @var Cors $cors */

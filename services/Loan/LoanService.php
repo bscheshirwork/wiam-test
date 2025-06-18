@@ -2,6 +2,7 @@
 
 namespace app\services\Loan;
 
+use Override;
 use app\contracts\Loan\CreateLoanDto;
 use app\contracts\Loan\LoanServiceInterface;
 use app\contracts\Loan\LoanStatusEnum;
@@ -11,11 +12,13 @@ use yii\web\ServerErrorHttpException;
 
 final class LoanService implements LoanServiceInterface
 {
+    #[Override]
     public function createLoan(CreateLoanDto $createLoanDto): int
     {
         return Loan::createLoan($createLoanDto);
     }
 
+    #[Override]
     public function processLoans(ProcessLoansDto $processLoansDto): bool
     {
         /** @var Loan $loan */

@@ -36,6 +36,7 @@
     "ecs-fix": "vendor/bin/ecs check --fix --config config/staticAnalysisTool/ecs.php",
     "phpstan": "php -d memory_limit=4G vendor/bin/phpstan analyse -c config/staticAnalysisTool/phpstan.neon",
     "psalm": "vendor/bin/psalm --config=config/staticAnalysisTool/psalm.xml",
+    "psalm-fix": "vendor/bin/psalter --issues=all --config=config/staticAnalysisTool/psalm.xml",
     "psalm-info": "vendor/bin/psalm --show-info=true --config=config/staticAnalysisTool/psalm.xml",
     "rector": "vendor/bin/rector process --dry-run --config config/staticAnalysisTool/rector.php",
     "rector-fix": "vendor/bin/rector process --config config/staticAnalysisTool/rector.php"

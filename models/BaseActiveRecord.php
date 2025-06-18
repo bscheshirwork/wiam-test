@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Override;
 use yii\db\ActiveRecord;
 use yii\db\BaseActiveRecord as YiiDbBaseActiveRecord;
 
@@ -9,6 +10,7 @@ class BaseActiveRecord extends ActiveRecord
 {
     use ModelAttributeTrait;
 
+    #[Override]
     public static function populateRecord($record, $row): void
     {
         $attributesConfig = static::getAttributesConfig();
