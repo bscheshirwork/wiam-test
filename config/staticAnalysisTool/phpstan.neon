@@ -1,5 +1,5 @@
 includes:
-    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - ../../vendor/phpstan/phpstan-strict-rules/rules.neon
 parameters:
     level: 0
     strictRules:
@@ -7,12 +7,10 @@ parameters:
         booleansInConditions: false
         uselessCast: true
         requireParentConstructorCall: true
-        disallowedConstructs: false
         overwriteVariablesWithLoop: true
         closureUsesThis: true
         matchingInheritedMethodNames: true
         numericOperandsInArithmeticOperators: true
-        strictCalls: true
         switchConditionsMatchingType: true
         noVariableVariables: true
     tmpDir: ../../var/cache/.phpstain_cache
