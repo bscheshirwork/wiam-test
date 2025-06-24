@@ -11,20 +11,20 @@ trait ModelAttributeTrait
 {
     protected ?array $attributeLabels = null;
 
-    private static array $attributesConfig = [];
-
     public static function getAttributesConfig(): array
     {
-        if (!isset(static::$attributesConfig[static::class])) {
+        static $attributesConfig = [];
+
+        if (!isset($attributesConfig[static::class])) {
+            $attributesConfig[static::class] = [];
             $reflection = new ReflectionClass(static::class);
-            static::$attributesConfig[static::class] = [];
             foreach ($reflection->getAttributes(ModelAttribute::class) as $attributeReflection) {
                 $attribute = $attributeReflection->newInstance();
-                static::$attributesConfig[static::class][$attribute->name] = $attribute;
+                $attributesConfig[static::class][$attribute->name] = $attribute;
             }
         }
 
-        return static::$attributesConfig[static::class];
+        return $attributesConfig[static::class];
     }
 
     final public function rules(): never
