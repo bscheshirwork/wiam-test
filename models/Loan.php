@@ -33,7 +33,7 @@ final class Loan extends BaseActiveRecord
         return boolval(self::findOne([
             'user_id' => $userId,
             'status' => LoanStatusEnum::APPROVED->value,
-        ])?->id ?? false);
+        ])?->id);
     }
 
     public static function createLoan(CreateLoanDto $createLoanDto): int
