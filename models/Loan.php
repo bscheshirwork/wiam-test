@@ -28,12 +28,17 @@ final class Loan extends BaseActiveRecord
         return '{{%loan}}';
     }
 
-    public static function hasUser(int $userId): bool
+    public static function getApprovedLoanIdByUserId(int $userId): ?int
     {
-        return boolval(self::findOne([
+        return self::findOne([
             'user_id' => $userId,
             'status' => LoanStatusEnum::APPROVED->value,
-        ])?->id);
+        ])?->id;
+    }
+
+    public static function hasUser(int $userId): bool
+    {
+        return boolval(self::getApprovedLoanIdByUserId($userId));
     }
 
     public static function createLoan(CreateLoanDto $createLoanDto): int

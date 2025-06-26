@@ -29,10 +29,15 @@ final class LoanService implements LoanServiceInterface
                 LoanStatusEnum::APPROVED :
                 LoanStatusEnum::DECLINED;
             if ($status === LoanStatusEnum::APPROVED) {
-                //проверка на то, что не сохранили в другом потоке.
-                $loan->status = Loan::hasUser($loan->user_id) ?
-                    LoanStatusEnum::DECLINED :
-                    LoanStatusEnum::APPROVED;
+                //проверка на то, что не сохранили в другом потоке (без PostgreSQL).
+                $loanId = Loan::getApprovedLoanIdByUserId($loan->userId);
+                if ($loanId === null) {
+                    $loan->status = LoanStatusEnum::APPROVED;
+                } elseif ($loanId === $loan->id) {
+                    continue;
+                } else {
+                    $loan->status = LoanStatusEnum::DECLINED;
+                }
             } else {
                 $loan->status = LoanStatusEnum::DECLINED;
             }
