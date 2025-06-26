@@ -25,12 +25,12 @@ final class LoanService implements LoanServiceInterface
         foreach (Loan::getNewLoans() as $loan) {
             sleep($processLoansDto->delay);
             $rand = rand(0, 100);
-            $status = $rand >= 90 ?
+            $status = $rand >= 0 ?
                 LoanStatusEnum::APPROVED :
                 LoanStatusEnum::DECLINED;
             if ($status === LoanStatusEnum::APPROVED) {
                 //проверка на то, что не сохранили в другом потоке (без PostgreSQL).
-                $loanId = Loan::getApprovedLoanIdByUserId($loan->userId);
+                $loanId = Loan::getApprovedLoanIdByUserId($loan->user_id);
                 if ($loanId === null) {
                     $loan->status = LoanStatusEnum::APPROVED;
                 } elseif ($loanId === $loan->id) {
@@ -42,8 +42,11 @@ final class LoanService implements LoanServiceInterface
                 $loan->status = LoanStatusEnum::DECLINED;
             }
 
-            if (!$loan->save()) {
-                throw new ServerErrorHttpException('Failed to update loan');
+            if (!$loan->commitStatus()) {
+                $loan->status = LoanStatusEnum::DECLINED;
+                if (!$loan->commitStatus()) {
+                    throw new ServerErrorHttpException('Failed to update loan');
+                }
             }
         }
 
