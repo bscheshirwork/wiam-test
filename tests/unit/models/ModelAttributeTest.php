@@ -36,7 +36,5 @@ final class ModelAttributeTest extends TestCase
             [['require']],
         );
         $this->assertTrue($model->isEnum);
-
-
     }
 }

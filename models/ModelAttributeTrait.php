@@ -34,7 +34,7 @@ trait ModelAttributeTrait
 
     public function attributeLabels(): array
     {
-        return $this->attributeLabels ??= array_column(static::getAttributesConfig(), 'label');
+        return $this->attributeLabels ??= array_column(static::getAttributesConfig(), 'label', 'name');
     }
 
     public function createValidators(): ArrayObject

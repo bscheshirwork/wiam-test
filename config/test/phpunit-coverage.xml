@@ -10,4 +10,16 @@
             <directory>../../tests</directory>
         </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory>../../models</directory>
+        </include>
+    </source>
+    <coverage
+            pathCoverage="true">
+        <report>
+            <html outputDirectory="../../var/log/artifacts/codeCoverage/html"/>
+        </report>
+    </coverage>
+
 </phpunit>

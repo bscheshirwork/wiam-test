@@ -34,7 +34,7 @@
   },
   "scripts": {
     "tests" : "vendor/phpunit/phpunit/phpunit -c ./config/test/phpunit.xml --no-coverage",
-    "tests-coverage" : "php -d memory_limit=4G vendor/phpunit/phpunit/phpunit -c ./config/test/phpunit.xml ./tests",
+    "tests-coverage" : "php -d memory_limit=4G vendor/phpunit/phpunit/phpunit -c ./config/test/phpunit-coverage.xml ./tests",
     "ecs": "vendor/bin/ecs check --config config/staticAnalysisTool/ecs.php",
     "ecs-fix": "vendor/bin/ecs check --fix --config config/staticAnalysisTool/ecs.php",
     "phpstan": "php -d memory_limit=4G vendor/bin/phpstan analyse -c config/staticAnalysisTool/phpstan.neon",
