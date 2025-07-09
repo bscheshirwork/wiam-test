@@ -2,10 +2,10 @@
 
 namespace app\services\Client;
 
-use Override;
 use app\contracts\Client\ClientServiceInterface;
 use app\contracts\Client\LoanFilter;
 use app\models\Loan;
+use Override;
 
 final class ClientService implements ClientServiceInterface
 {

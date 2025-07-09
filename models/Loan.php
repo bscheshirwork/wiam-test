@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use Override;
-use Generator;
 use app\contracts\Loan\CreateLoanDto;
 use app\contracts\Loan\LoanStatusEnum;
+use Generator;
+use Override;
 use yii\db\IntegrityException;
 use yii\web\ServerErrorHttpException;
 
@@ -60,10 +60,10 @@ final class Loan extends BaseActiveRecord
     public static function getNewLoans(): Generator
     {
         foreach (self::find()
-                     ->where([
-                         'status' => LoanStatusEnum::NEW->value,
-                     ])
-                     ->each() as $loan) {
+            ->where([
+                'status' => LoanStatusEnum::NEW->value,
+            ])
+            ->each() as $loan) {
             yield $loan;
         }
     }
@@ -73,11 +73,12 @@ final class Loan extends BaseActiveRecord
         // Обработка ошибки дублирования индекса. Инициирование событий и установка _oldAttributes
         try {
             $this->update(false, ['status']);
-        } catch (IntegrityException $e) {
-            if (str_contains($e->getMessage(), 'idx-loan-user_id-approved')) {
+        } catch (IntegrityException $integrityException) {
+            if (str_contains($integrityException->getMessage(), 'idx-loan-user_id-approved')) {
                 return false;
             }
-            throw $e;
+
+            throw $integrityException;
         }
 
         return true;

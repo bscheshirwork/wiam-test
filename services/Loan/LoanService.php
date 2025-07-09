@@ -2,12 +2,12 @@
 
 namespace app\services\Loan;
 
-use Override;
 use app\contracts\Loan\CreateLoanDto;
 use app\contracts\Loan\LoanServiceInterface;
 use app\contracts\Loan\LoanStatusEnum;
 use app\contracts\Loan\ProcessLoansDto;
 use app\models\Loan;
+use Override;
 use yii\web\ServerErrorHttpException;
 
 final class LoanService implements LoanServiceInterface
@@ -25,7 +25,7 @@ final class LoanService implements LoanServiceInterface
         foreach (Loan::getNewLoans() as $loan) {
             sleep($processLoansDto->delay);
             $rand = rand(0, 100);
-            $status = $rand >= 0 ?
+            $status = $rand >= 90 ?
                 LoanStatusEnum::APPROVED :
                 LoanStatusEnum::DECLINED;
             if ($status === LoanStatusEnum::APPROVED) {

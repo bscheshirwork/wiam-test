@@ -2,8 +2,8 @@
 
 namespace app\modules\api;
 
-use Override;
 use app\modules\api\modules\v1\ApiV1Module;
+use Override;
 use yii\base\BootstrapInterface;
 use yii\base\Module;
 use yii\rest\UrlRule;

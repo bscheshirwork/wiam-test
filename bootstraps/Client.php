@@ -2,9 +2,9 @@
 
 namespace app\bootstraps;
 
-use Override;
 use app\contracts\Client\ClientServiceInterface;
 use app\services\Client\ClientService;
+use Override;
 use Yii;
 use yii\base\BootstrapInterface;
 

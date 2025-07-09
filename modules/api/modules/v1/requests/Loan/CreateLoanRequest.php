@@ -2,11 +2,11 @@
 
 namespace app\modules\api\modules\v1\requests\Loan;
 
-use Override;
 use app\contracts\Client\ClientServiceInterface;
 use app\contracts\Client\LoanFilter;
 use app\contracts\Loan\CreateLoanDto;
 use app\modules\api\modules\v1\requests\BaseApiV1Request;
+use Override;
 use Yii;
 
 final class CreateLoanRequest extends BaseApiV1Request

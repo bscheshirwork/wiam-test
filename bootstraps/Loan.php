@@ -2,9 +2,9 @@
 
 namespace app\bootstraps;
 
-use Override;
 use app\contracts\Loan\LoanServiceInterface;
 use app\services\Loan\LoanService;
+use Override;
 use Yii;
 use yii\base\BootstrapInterface;
 

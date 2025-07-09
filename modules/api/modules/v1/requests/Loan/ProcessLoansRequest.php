@@ -2,9 +2,9 @@
 
 namespace app\modules\api\modules\v1\requests\Loan;
 
-use Override;
 use app\contracts\Loan\ProcessLoansDto;
 use app\modules\api\modules\v1\requests\BaseApiV1Request;
+use Override;
 
 final class ProcessLoansRequest extends BaseApiV1Request
 {
