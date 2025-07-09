@@ -4,6 +4,7 @@
         xsi:noNamespaceSchemaLocation="../../vendor/phpunit/phpunit/phpunit.xsd"
         cacheDirectory="../../var/cache/.phpunit_cache"
         bootstrap="../../tests/unit/bootstrap.php"
+        displayDetailsOnTestsThatTriggerWarnings="true"
         colors="true">
     <testsuites>
         <testsuite name="default">
